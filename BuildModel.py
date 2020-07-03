@@ -31,8 +31,8 @@ def LayerStats(layers, outputs):
         print()
 
 # extracting style layers
-style_extractor = VggModelLayers(STYLE_LAYERS)
-style_outputs = style_extractor(STYLE_IMAGE * 255)
+#style_extractor = VggModelLayers(STYLE_LAYERS)
+#style_outputs = style_extractor(STYLE_IMAGE * 255)
 
 # style layers stats
 #LayerStats(STYLE_LAYERS, style_outputs)
@@ -44,3 +44,26 @@ def GramMatrix(tensor):
     locations = tf.cast(input_shape[1]*input_shape[2], tf.float32)
     return output/(locations)
 
+# extracting style and content
+class StyleContentExtractionModel(tf.keras.models.Model):
+    def __init__(self, style_layers, content_layers):
+        super(StyleContentExtractionModel, self).__init__()
+        self.vgg = VggModelLayers(style_layers + content_layers)
+        self.style_layers = style_layers
+        self.content_layers = content_layers
+        self.num_style_layers = len(style_layers)
+        self.vgg.trainable = False
+
+    def call(self, inputs):
+        """Input: float in [0,1]"""
+        inputs = inputs * 255.0
+        preprocessed_inputs = tf.keras.applications.vgg19.preprocess_input(inputs)
+        outputs = self.vgg(preprocessed_inputs)
+        style_outputs, content_outputs = (outputs[:self.num_style_layers], outputs[self.num_style_layers:])
+        style_outputs = [GramMatrix(style_output) for style_output in style_outputs]
+        content_dict = {name:value for name, value in zip(self.content_layers, content_outputs)}
+        style_dict = {name:value for name, value in zip(self.style_layers, style_outputs)}
+        return {'content': content_dict, 'style':style_dict}
+
+# setting feature extractor
+extractor = StyleContentExtractionModel(STYLE_LAYERS, CONTENT_LAYERS)

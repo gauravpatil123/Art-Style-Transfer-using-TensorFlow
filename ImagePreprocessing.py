@@ -23,7 +23,7 @@ def tensorToImage(tensor):
 
 # function to load image with set max dimention
 def loadImage(path):
-    maxdim = 512
+    maxdim = 600
     image = tf.io.read_file(path)
     image = tf.image.decode_image(image, channels=3)
     image = tf.image.convert_image_dtype(image, tf.float32)
