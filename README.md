@@ -26,11 +26,11 @@ Neural Art Style Transfer based on [Gatys et al.](https://arxiv.org/abs/1508.065
   - Rescaled Images :
     <img src="Images/outputs/resaled_content_and_style_images.png" width=1000>
   - Output Images :<br />
-    Epoch 1 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp; Epoch 5 <br />
+    Epoch 1 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp; &nbsp; Epoch 5 <br />
     <img src="Images/outputs/epoch_1.png" width=350> &nbsp; &nbsp; &nbsp; &nbsp; <img src="Images/outputs/epoch_5.png" width=350> <br /><br />
-    Epoch 10 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp; Epoch 15 <br />
+    Epoch 10 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp; &nbsp; Epoch 15 <br />
     <img src="Images/outputs/epoch_10.png" width=350> &nbsp; &nbsp; &nbsp; &nbsp; <img src="Images/outputs/epoch_15.png" width=350> <br /><br />
-    Epoch 20 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp; Epoch 25 <br />
+    Epoch 20 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp; &nbsp; Epoch 25 <br />
     <img src="Images/outputs/epoch_20.png" width=350> &nbsp; &nbsp; &nbsp; &nbsp; <img src="Images/outputs/epoch_25.png" width=350> <br /><br />
   - Stylized Image : <br />
     <img src="Images/outputs/stylized-image.png" width=1000>
