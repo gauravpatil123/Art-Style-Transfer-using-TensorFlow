@@ -35,4 +35,36 @@ Neural Art Style Transfer based on [Gatys et al.](https://arxiv.org/abs/1508.065
   - Stylized Image : <br />
     <img src="Images/outputs/stylized-image.png" width=1000>
 - **Mozart - Van Gogh - Portrait**
+  - Parameters :
+    1. Total variation weight = 30
+    2. Style weight = 5e-2
+    3. Content weight = 1e4
+    4. Epochs = 25
+    5. Steps per epoch = 100
+    6. optimizer = Adam(learning rate = 0.005, beta_1 = 0.99, epsilon = 1e-1)
+  - Input Images :
+    - Content Image : <br />
+      <img src="Images/other_examples/1/content.jpg" Height=500>
+    - Style Image : <br />
+      <img src="Images/other_examples/1/style.jpg" Height=500>
+  - Rescaled Images : <br />
+    <img src="Images/other_examples/1/resaled_content_and_style_images.png" width=1000>
+  - Stylized Image : <br />
+    <img src="Images/other_examples/1/stylized-image.png" height=1000>
 - **Horse - Kandinsky**
+  - Parameters :
+    1. Total variation weight = 30
+    2. Style weight = 5e-2
+    3. Content weight = 1e4
+    4. Epochs = 25
+    5. Steps per epoch = 100
+    6. optimizer = Adam(learning rate = 0.005, beta_1 = 0.99, epsilon = 1e-1)
+  - Input Images :
+    - Content Image : <br />
+      <img src="Images/other_examples/2/content.jpg" width=1000>
+    - Style Image : <br />
+      <img src="Images/other_examples/2/style.jpg" width=1000>
+  - Rescaled Images : <br />
+    <img src="Images/other_examples/2/resaled_content_and_style_images.png" width=1000>
+  - Stylized Image : <br />
+    <img src="Images/other_examples/2/stylized-image.png" width=1000>
