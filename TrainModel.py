@@ -11,7 +11,9 @@ import IPython.display as display
 import ImagePreprocessing as IP
 import DefineRepresentations as DR
 import BuildModel as BM
+import logging
 
+'''
 CONTENT_IMAGE = IP.content_img
 STYLE_IMAGE = IP.style_img
 CONTENT_LAYERS = DR.content_layers
@@ -19,9 +21,18 @@ STYLE_LAYERS = DR.style_layers
 NUM_STYLE_LAYERS = DR.num_style_layers
 NUM_CONTENT_LAYERS = DR.num_content_layers
 EXTRACTOR = BM.extractor
+'''
+
+IMAGES = IP.ProcessImages("Images/source/content.jpg", "Images/source/style.jpg")
+CONTENT_IMAGE, STYLE_IMAGE = IMAGES()
+LAYER_REP = DR.RepresentationLayers()
+CONTENT_LAYERS, STYLE_LAYERS = LAYER_REP()
+NUM_CONTENT_LAYERS = LAYER_REP.get_num_content_layers()
+NUM_STYLE_LAYERS = LAYER_REP.get_num_style_layers()
+EXTRACTOR = BM.StyleContentExtraction(STYLE_LAYERS, CONTENT_LAYERS, STYLE_IMAGE, CONTENT_IMAGE, True, True)
+
 
 """Running Gradient Descent"""
-
 # setting style and content parameter targets
 style_targets = EXTRACTOR(STYLE_IMAGE)['style']
 content_targets = EXTRACTOR(CONTENT_IMAGE)['content']
@@ -89,14 +100,19 @@ for n in range(epochs):
             print("Step = ", step)
         train_step(image)
     file_name = "Images/outputs/epoch_" + str(n + 1) + ".png"
-    IP.tensorToImage(image).save(file_name)
+    #IP.tensorToImage(image).save(file_name)
+    new_img = IP.ProcessImages()
+    new_img.tensorToImage(image).save(file_name)
     display.clear_output(wait=True)
-    display.display(IP.tensorToImage(image).show())
+    #display.display(IP.tensorToImage(image).show())
+    display.display(new_img.tensorToImage(image).show())
     print("Train step: {}".format(step))
 
 end = time.time()
 print("Total time: {:.1f}".format(end-start))
 
 file_name = 'Images/outputs/stylized-image.png'
-IP.tensorToImage(image).save(file_name)
+final_img = IP.ProcessImages()
+#IP.tensorToImage(image).save(file_name)
+final_img.tensorToImage(image).save(file_name)
 
