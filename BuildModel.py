@@ -4,11 +4,12 @@ import ImagePreprocessing as IP
 import DefineRepresentations as DR
 import logging
 
-#CONTENT_IMAGE = IP.content_img
-#STYLE_IMAGE = IP.style_img
-#CONTENT_LAYERS = DR.content_layers
-#STYLE_LAYERS = DR.style_layers
+CONTENT_IMAGE = IP.content_img
+STYLE_IMAGE = IP.style_img
+CONTENT_LAYERS = DR.content_layers
+STYLE_LAYERS = DR.style_layers
 
+'''
 class StyleContentExtraction(tf.keras.models.Model):
     
     def __init__(self, style_layers, content_layers, style_image=None, content_image=None, 
@@ -91,9 +92,9 @@ class StyleContentExtraction(tf.keras.models.Model):
         content_dict = {name:value for name, value in zip(self.content_layers, content_outputs)}
         style_dict = {name:value for name, value in zip(self.style_layers, style_outputs)}
         return {'content': content_dict, 'style':style_dict}
-
-
 '''
+
+
 def VggModelLayers(layer_names):
     """creates and returns a vgg model 
     that returns a list of intermediate outut values"""
@@ -150,9 +151,8 @@ class StyleContentExtractionModel(tf.keras.models.Model):
         content_dict = {name:value for name, value in zip(self.content_layers, content_outputs)}
         style_dict = {name:value for name, value in zip(self.style_layers, style_outputs)}
         return {'content': content_dict, 'style':style_dict}
-'''
 
-'''
+
 # setting feature extractor
 extractor = StyleContentExtractionModel(STYLE_LAYERS, CONTENT_LAYERS)
-'''
+

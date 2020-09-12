@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 
+'''
 class RepresentationLayers:
 
     def __init__(self):
@@ -21,8 +22,9 @@ class RepresentationLayers:
 
     def get_num_content_layers(self):
         return self.num_content_layers
-
 '''
+
+
 """defining content and style representations"""
 
 # loading vgg without classification head and listing layer names
@@ -47,4 +49,3 @@ style_layers = ['block1_conv1',
 
 num_content_layers = len(content_layers)
 num_style_layers = len(style_layers)
-'''

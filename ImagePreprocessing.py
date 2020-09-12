@@ -3,16 +3,16 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-# mpl.rcParams['figure.figsize'] = (12, 10)
-# mpl.rcParams['axes.grid'] = False
+mpl.rcParams['figure.figsize'] = (12, 10)
+mpl.rcParams['axes.grid'] = False
 
-
+'''
 class ProcessImages:
 
     def __init__(self, content_img_path=None, style_img_path=None, figsize=(12, 10), axes_grid=False):
         mpl.rcParams['figure.figsize'] = figsize
         mpl.rcParams['axes.grid'] = axes_grid
-        self.content_image_path = content_image_path
+        self.content_image_path = content_img_path
         self.style_image_path = style_img_path
 
     
@@ -54,8 +54,8 @@ class ProcessImages:
     def __call__(self, show_plots=False):
         content_image_path = self.content_image_path
         style_image_path = self.style_image_path
-        content_img = loadImage(content_image_path)
-        style_img = loadImage(style_image_path)
+        content_img = self.loadImage(content_image_path)
+        style_img = self.loadImage(style_image_path)
         
         plt.subplot(1, 2, 1)
         imshow(content_img, "Content Image")
@@ -70,6 +70,7 @@ class ProcessImages:
 
         return content_img, style_img
 '''
+
 # image directory paths
 content_image_path = "Images/source/content.jpg"
 style_image_path = "Images/source/style.jpg"
@@ -110,9 +111,9 @@ def imshow(image, title=None):
     plt.imshow(image)
     if title:
         plt.title(title)
-'''
 
-'''
+
+
 """ displaying images"""
 content_img = loadImage(content_image_path)
 style_img = loadImage(style_image_path)
@@ -125,4 +126,4 @@ imshow(style_img, "Style Image")
 
 plt.savefig("Images/outputs/resaled_content_and_style_images.png")
 #plt.show()
-'''
+
