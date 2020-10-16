@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 mpl.rcParams['figure.figsize'] = (12, 10)
 mpl.rcParams['axes.grid'] = False
+import logging
+
+logging.basicConfig(format="%(message)s", level=logging.INFO)
 
 '''
 class ProcessImages:
@@ -112,6 +115,41 @@ def imshow(image, title=None):
     if title:
         plt.title(title)
 
+def VggModelLayers(layer_names):
+    """creates and returns a vgg model 
+    that returns a list of intermediate outut values"""
+    # loading a pre-trained VGG model trained on imagenet data
+    vgg = tf.keras.applications.VGG19(include_top=False, weights='imagenet')
+    # freezing vgg layers
+    vgg.trainable = False
+
+    outputs = [vgg.get_layer(name).output for name in layer_names]
+    model = tf.keras.Model([vgg.input], outputs)
+    return model
+
+# function to represent staticstics for each layer's output
+def LayerStats(layers, outputs):
+    for name, output in zip(layers, outputs):
+        log_name = name
+        shape_log = "    shape: " + str(output.numpy().shape)
+        min_log = "    min: " + str(output.numpy().min())
+        max_log = "    max: " + str(output.numpy().max())
+        mean_log = "    mean: " + str(output.numpy().mean())
+        nextline = "\n"
+        logging.info(log_name)
+        logging.info(shape_log)
+        logging.info(min_log)
+        logging.info(max_log)
+        logging.info(mean_log)
+        logging.info(nextline)
+        """
+        print(name)
+        print("     shape: ", output.numpy().shape)
+        print("     min: ", output.numpy().min())
+        print("     max: ", output.numpy().max())
+        print("     mean: ", output.numpy().mean())
+        print()
+        """
 
 
 """ displaying images"""

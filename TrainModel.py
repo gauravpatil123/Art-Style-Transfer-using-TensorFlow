@@ -13,7 +13,7 @@ import DefineRepresentations as DR
 import BuildModel as BM
 import logging
 
-
+'''
 CONTENT_IMAGE = IP.content_img
 STYLE_IMAGE = IP.style_img
 CONTENT_LAYERS = DR.content_layers
@@ -21,17 +21,19 @@ STYLE_LAYERS = DR.style_layers
 NUM_STYLE_LAYERS = DR.num_style_layers
 NUM_CONTENT_LAYERS = DR.num_content_layers
 EXTRACTOR = BM.extractor
-
-
 '''
-IMAGES = IP.ProcessImages(content_img_path="Images/source/content.jpg", style_img_path="Images/source/style.jpg")
-CONTENT_IMAGE, STYLE_IMAGE = IMAGES()
+
+
+#IMAGES = IP.ProcessImages(content_img_path="Images/source/content.jpg", style_img_path="Images/source/style.jpg")
+#CONTENT_IMAGE, STYLE_IMAGE = IMAGES()
+CONTENT_IMAGE = IP.content_img
+STYLE_IMAGE = IP.style_img
 LAYER_REP = DR.RepresentationLayers()
 CONTENT_LAYERS, STYLE_LAYERS = LAYER_REP()
 NUM_CONTENT_LAYERS = LAYER_REP.get_num_content_layers()
 NUM_STYLE_LAYERS = LAYER_REP.get_num_style_layers()
 EXTRACTOR = BM.StyleContentExtraction(STYLE_LAYERS, CONTENT_LAYERS, STYLE_IMAGE, CONTENT_IMAGE, True, True)
-'''
+
 
 """Running Gradient Descent"""
 # setting style and content parameter targets

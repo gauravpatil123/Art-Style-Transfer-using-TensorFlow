@@ -3,13 +3,15 @@ import tensorflow as tf
 import ImagePreprocessing as IP
 import DefineRepresentations as DR
 import logging
+from ImagePreprocessing import VggModelLayers, LayerStats
 
 CONTENT_IMAGE = IP.content_img
 STYLE_IMAGE = IP.style_img
-CONTENT_LAYERS = DR.content_layers
-STYLE_LAYERS = DR.style_layers
+#CONTENT_LAYERS = DR.content_layers
+#STYLE_LAYERS = DR.style_layers
+LAYER_REP = DR.RepresentationLayers()
+CONTENT_LAYERS, STYLE_LAYERS = LAYER_REP()
 
-'''
 class StyleContentExtraction(tf.keras.models.Model):
     
     def __init__(self, style_layers, content_layers, style_image=None, content_image=None, 
@@ -18,6 +20,7 @@ class StyleContentExtraction(tf.keras.models.Model):
         super(StyleContentExtraction, self).__init__()
         logging.basicConfig(format="%(message)s", level=logging.INFO)
 
+        '''
         def VggModelLayers(layer_names):
             """creates and returns a vgg model 
             that returns a list of intermediate outut values"""
@@ -53,7 +56,8 @@ class StyleContentExtraction(tf.keras.models.Model):
                 print("     mean: ", output.numpy().mean())
                 print()
                 """
-        
+        '''
+
         self.vgg = VggModelLayers(style_layers + content_layers)
         self.style_layers = style_layers
         self.content_layers = content_layers
@@ -63,20 +67,20 @@ class StyleContentExtraction(tf.keras.models.Model):
         # extracting style layers
         if style_stats:
             style_extractor = VggModelLayers(style_layers)
-            assert(style_image)
-            style_outputs = style_extractor(style_image * 255)
-            # style layers stats
-            LayerStats(style_layers, style_outputs)
+            if style_image != None:
+                style_outputs = style_extractor(style_image * 255)
+                # style layers stats
+                LayerStats(style_layers, style_outputs)
 
         if content_stats:
             content_extractor = VggModelLayers(content_layers)
-            assert(content_image)
-            content_outputs = content_extractor(content_image * 255)
-            # content layer stats
-            LayerStats(content_layers, content_outputs)
+            if content_image != None:
+                content_outputs = content_extractor(content_image * 255)
+                # content layer stats
+                LayerStats(content_layers, content_outputs)
 
     # calculating style using gram matrix
-    def GramMatrix(tensor):
+    def GramMatrix(self, tensor):
         output = tf.linalg.einsum('bijc,bijd->bcd', tensor, tensor)
         input_shape = tf.shape(tensor)
         locations = tf.cast(input_shape[1]*input_shape[2], tf.float32)
@@ -88,13 +92,13 @@ class StyleContentExtraction(tf.keras.models.Model):
         preprocessed_inputs = tf.keras.applications.vgg19.preprocess_input(inputs)
         outputs = self.vgg(preprocessed_inputs)
         style_outputs, content_outputs = (outputs[:self.num_style_layers], outputs[self.num_style_layers:])
-        style_outputs = [GramMatrix(style_output) for style_output in style_outputs]
+        style_outputs = [self.GramMatrix(style_output) for style_output in style_outputs]
         content_dict = {name:value for name, value in zip(self.content_layers, content_outputs)}
         style_dict = {name:value for name, value in zip(self.style_layers, style_outputs)}
         return {'content': content_dict, 'style':style_dict}
+
+
 '''
-
-
 def VggModelLayers(layer_names):
     """creates and returns a vgg model 
     that returns a list of intermediate outut values"""
@@ -155,4 +159,4 @@ class StyleContentExtractionModel(tf.keras.models.Model):
 
 # setting feature extractor
 extractor = StyleContentExtractionModel(STYLE_LAYERS, CONTENT_LAYERS)
-
+'''
