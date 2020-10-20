@@ -1,3 +1,8 @@
+"""
+TrainModel:
+    Trains the model and saves the converted image
+"""
+
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -13,19 +18,7 @@ import DefineRepresentations as DR
 import BuildModel as BM
 import logging
 
-'''
-CONTENT_IMAGE = IP.content_img
-STYLE_IMAGE = IP.style_img
-CONTENT_LAYERS = DR.content_layers
-STYLE_LAYERS = DR.style_layers
-NUM_STYLE_LAYERS = DR.num_style_layers
-NUM_CONTENT_LAYERS = DR.num_content_layers
-EXTRACTOR = BM.extractor
-'''
-
-
-#IMAGES = IP.ProcessImages(content_img_path="Images/source/content.jpg", style_img_path="Images/source/style.jpg")
-#CONTENT_IMAGE, STYLE_IMAGE = IMAGES()
+# Initializing objects
 CONTENT_IMAGE = IP.content_img
 STYLE_IMAGE = IP.style_img
 LAYER_REP = DR.RepresentationLayers()
@@ -34,6 +27,8 @@ NUM_CONTENT_LAYERS = LAYER_REP.get_num_content_layers()
 NUM_STYLE_LAYERS = LAYER_REP.get_num_style_layers()
 EXTRACTOR = BM.StyleContentExtraction(STYLE_LAYERS, CONTENT_LAYERS, STYLE_IMAGE, CONTENT_IMAGE, True, True)
 
+# logging configuration
+logging.basicConfig(format="%(message)s", level=logging.INFO)
 
 """Running Gradient Descent"""
 # setting style and content parameter targets
@@ -90,32 +85,30 @@ image = tf.Variable(CONTENT_IMAGE)
 # optimization
 start = time.time()
 
+# training parameters
 epochs = 25
 steps_per_epoch = 100
 
 step = 0
-print("Starting optimization loop:")
+start_log = "Starting optimization loop:"
+logging.info(start_log)
 for n in range(epochs):
-    print("epoch = ", n + 1)
+    epoch_log = "epoch = " + str(n + 1)
+    logging.info(epoch_log)
     for m in range(steps_per_epoch):
         step += 1
         if step % 10 == 0:
-            print("Step = ", step)
+            step_log = "Step = " + str(step)
+            logging.info(step_log)
         train_step(image)
     file_name = "Images/outputs/epoch_" + str(n + 1) + ".png"
     IP.tensorToImage(image).save(file_name)
-    #new_img = IP.ProcessImages()
-    #new_img.tensorToImage(image).save(file_name)
     display.clear_output(wait=True)
     display.display(IP.tensorToImage(image).show())
-    #display.display(new_img.tensorToImage(image).show())
     print("Train step: {}".format(step))
 
 end = time.time()
 print("Total time: {:.1f}".format(end-start))
 
 file_name = 'Images/outputs/stylized-image.png'
-#final_img = IP.ProcessImages()
 IP.tensorToImage(image).save(file_name)
-#final_img.tensorToImage(image).save(file_name)
-
