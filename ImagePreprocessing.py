@@ -24,6 +24,9 @@ style_image_path = "Images/source/style.jpg"
 """ helper functions """
 def tensorToImage(tensor):
     """
+    This function is taken from tensorflow tutorial on neural style transfer
+    link: (https://www.tensorflow.org/tutorials/generative/style_transfer)
+
     Input:
         tensor: Input tensor
     
@@ -41,6 +44,9 @@ def tensorToImage(tensor):
 # function to load image with set max dimention
 def loadImage(path, maxdim=600):
     """
+    This function is taken from tensorflow tutorial on nueral style transfer
+    link: (https://www.tensorflow.org/tutorials/generative/style_transfer)
+
     Input:
         path: directory path of image to load
 
@@ -64,6 +70,9 @@ def loadImage(path, maxdim=600):
 # function to display images
 def imshow(image, title=None):
     """
+    This function is taken from tensorflow tutorial on nueral style transfer
+    link: (https://www.tensorflow.org/tutorials/generative/style_transfer)
+
     Input:
         image: image to show
         title: title for image
@@ -80,6 +89,9 @@ def imshow(image, title=None):
 
 def VggModelLayers(layer_names):
     """
+    This function is taken from tensorflow tutorial on nueral style transfer
+    link: (https://www.tensorflow.org/tutorials/generative/style_transfer)
+
     Input:
         layer_names: layers to be included in the model
     

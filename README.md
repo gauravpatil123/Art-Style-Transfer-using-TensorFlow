@@ -12,7 +12,7 @@ Neural Art Style Transfer based on [Gatys et al.](https://arxiv.org/abs/1508.065
   3. Horse - Kandinsky
 
 **About**</br>
-This is a fun project that I have undertaken because of my fascination in style transfer techniques. The project is based on the original [Gatys et al.](https://arxiv.org/abs/1508.06576) paper.
+This is a fun project that I did because of my fascination in style transfer techniques. The project is based on the original [Gatys et al.](https://arxiv.org/abs/1508.06576) paper.
 Some of the code for the project is inspired from the TensorFlow tutorials. My inspiration for this project is from the "Convolutional Neural Networks" course offered by deeplearning.ai on Coursera taught by Dr. Andrew NG.
 Although more sophisticated techniques and algorithms for neural style transfer are available today, I wanted to try these techniques for myself and visualize the resulting stylized outputs.
 

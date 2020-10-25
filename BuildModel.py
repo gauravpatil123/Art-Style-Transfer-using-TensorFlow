@@ -68,6 +68,9 @@ class StyleContentExtraction(tf.keras.models.Model):
     # calculating style using gram matrix
     def GramMatrix(self, tensor):
         """
+        This function is taken from tensorflow tutorial on nueral style transfer
+        link: (https://www.tensorflow.org/tutorials/generative/style_transfer)
+
         Input:
             tensor: input tensor (of style image outputs from VGG model in this case)
         
